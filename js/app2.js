@@ -329,6 +329,85 @@ function calculadora() {
 
 	}
 
+	/*=============================================
+	=            METODOS            =
+	=============================================*/
+	function duplicar() {
+		(res = display.textContent)*2;
+	}
+
+	function limpiar() {
+		display.textContent = "";
+	}
+
+	function opuest() {
+
+		var numeroEnPantalla = display.textContent;
+		var nuevoNumero = parseInt(numeroEnPantalla) * -1;
+		display.textContent = nuevoNumero;
+
+	}
+
+	function resetear() {
+		display.textContent = "";
+		operandoa = 0;
+		operandob = 0;
+		operacion = "";
+	}
+
+	/*=============================================
+	= FUNCION PARA QUE NO DESBORDE LA PANTALLA  =
+	=============================================*/
+
+	function acomodarDisplay() {
+		var cadena = display.innerHTML
+		var numero = parseFloat(cadena)
+		limite = 8
+		if (cadena.indexOf(".") != -1) {
+			limite++
+		}
+		if (cadena.indexOf("-") != -1) {
+			limite++
+		}
+
+		if (cadena.length > limite) {
+			if (numero - numero.toFixed(0) == 0) {
+				display.innerHTML = numero
+			} else {
+				display.innerHTML = parseFloat(cadena).toPrecision(8)
+			}
+
+		}
+	}
+
+	function resolver() {
+		var res = 0;
+		switch (operacion) {
+
+			case "+":
+				res = parseFloat(operandoa) + parseFloat(operandob);
+				acomodarDisplay();
+				break;
+
+			case "-":
+				res = parseFloat(operandoa) - parseFloat(operandob);
+				acomodarDisplay();
+				break;
+
+			case "*":
+				res = parseFloat(operandoa) * parseFloat(operandob);
+				acomodarDisplay();
+				break;
+
+			case "/":
+				res = parseFloat(operandoa) / parseFloat(operandob);
+				acomodarDisplay();
+				break;
+
+		}
+		resetear();
+		display.textContent = res;
+	}
 
 
 }
